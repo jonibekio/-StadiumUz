@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StadiumUz - Premium Stadionlar Bron Qilish</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pitch-card:hover .book-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #111317;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2D333D;
+            border-radius: 10px;
+        }
+        .ghost-border {
+            border: 1px solid #2D333D;
+        }
+        .stadium-glow {
+            box-shadow: 0 0 20px rgba(42, 229, 0, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ffb4ab",
+                      "surface-container-low": "#1a1c20",
+                      "background": "#111317",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-background": "#e2e2e8",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container": "#1e2024",
+                      "on-secondary-container": "#f2f4ff",
+                      "primary-fixed-dim": "#2ae500",
+                      "surface-variant": "#333539",
+                      "on-secondary": "#002e69",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "surface-container-lowest": "#0c0e12",
+                      "surface-elevated": "#1A1D23",
+                      "inverse-primary": "#106e00",
+                      "on-secondary-fixed-variant": "#004494",
+                      "inverse-on-surface": "#2f3035",
+                      "surface": "#111317",
+                      "tertiary-fixed-dim": "#febb02",
+                      "text-secondary": "#94A3B8",
+                      "secondary-fixed": "#d8e2ff",
+                      "border-subtle": "#2D333D",
+                      "surface-overlay": "#262A33",
+                      "text-primary": "#FFFFFF",
+                      "error-container": "#93000a",
+                      "primary": "#efffe3",
+                      "surface-dim": "#111317",
+                      "outline-variant": "#3c4b35",
+                      "on-surface-variant": "#baccb0",
+                      "surface-container-highest": "#333539",
+                      "on-error": "#690005",
+                      "secondary": "#adc6ff",
+                      "tertiary-container": "#ffd890",
+                      "outline": "#85967c",
+                      "surface-bright": "#37393e",
+                      "on-tertiary": "#412d00",
+                      "on-tertiary-container": "#7e5b00",
+                      "surface-tint": "#2ae500",
+                      "surface-container-high": "#282a2e",
+                      "primary-container": "#39ff14",
+                      "on-primary": "#053900",
+                      "inverse-surface": "#e2e2e8",
+                      "on-primary-fixed-variant": "#095300",
+                      "secondary-container": "#006be2",
+                      "on-primary-fixed": "#022100",
+                      "on-secondary-fixed": "#001a41",
+                      "on-primary-container": "#107100",
+                      "on-tertiary-fixed": "#261900",
+                      "primary-fixed": "#79ff5b",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#fff9f4",
+                      "on-surface": "#e2e2e8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "search-bar-height": "64px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "button-text": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "label-caps": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "button-text": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface custom-scrollbar selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-search-bar-height px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/90 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-12">
+<h1 class="font-display-lg text-headline-md-mobile md:text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">StadiumUz</h1>
+<nav class="hidden md:flex gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps" href="#">Stadionlar</a>
+<a class="text-on-surface-variant font-body-md hover:bg-surface-variant/20 transition-colors px-2 py-1 rounded" href="#">Ligalar</a>
+<a class="text-on-surface-variant font-body-md hover:bg-surface-variant/20 transition-colors px-2 py-1 rounded" href="#">Tadbirlar</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 flex-1 max-w-md mx-8 hidden lg:flex">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container border-none rounded-full pl-10 pr-4 py-2 text-body-sm focus:ring-1 focus:ring-primary-container" placeholder="Stadion qidirish..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-on-surface-variant font-label-caps text-label-caps px-4 py-2 hover:bg-surface-variant/20 transition-colors rounded">Hamkorlik</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded font-button-text text-button-text stadium-glow hover:scale-[1.02] transition-transform active:scale-95 duration-100">Kirish</button>
+</div>
+</header>
+<main class="pt-[64px] flex min-h-screen">
+<!-- Sidebar Filter -->
+<aside class="hidden lg:flex flex-col w-[320px] fixed h-[calc(100vh-64px)] bg-surface-container-lowest border-r border-border-subtle p-margin-desktop overflow-y-auto custom-scrollbar">
+<div class="space-y-10">
+<!-- Hudud -->
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest">Hudud</label>
+<div class="relative">
+<select class="w-full bg-surface-container border-border-subtle text-on-surface rounded-lg px-4 py-3 appearance-none focus:ring-1 focus:ring-primary-container outline-none font-body-md">
+<option>Toshkent shahar</option>
+<option>Samarqand viloyati</option>
+<option>Buxoro viloyati</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Sana -->
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest">Sana</label>
+<div class="relative">
+<input class="w-full bg-surface-container border-border-subtle text-on-surface rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary-container outline-none font-body-md" type="date"/>
+</div>
+</div>
+<!-- Narx oralig'i -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Narx oralig'i</label>
+<span class="font-label-caps text-label-caps text-primary" id="price-range-display">200k - 800k so'm</span>
+</div>
+<input class="w-full accent-primary-container h-1 bg-surface-container rounded-lg appearance-none cursor-pointer" max="1000000" min="50000" step="10000" type="range" value="800000"/>
+</div>
+<!-- Reyting -->
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Reyting</label>
+<div class="flex gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded ghost-border bg-primary-container text-on-primary-container"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded ghost-border text-on-surface-variant hover:border-primary/50 transition-all"><span class="material-symbols-outlined">star</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded ghost-border text-on-surface-variant hover:border-primary/50 transition-all"><span class="material-symbols-outlined">star</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded ghost-border text-on-surface-variant hover:border-primary/50 transition-all"><span class="material-symbols-outlined">star</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded ghost-border text-on-surface-variant hover:border-primary/50 transition-all"><span class="material-symbols-outlined">star</span></button>
+</div>
+</div>
+<!-- Maydon turi -->
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Maydon turi</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full ghost-border font-label-caps text-label-caps bg-primary-container text-on-primary-container">5v5</button>
+<button class="px-4 py-2 rounded-full ghost-border font-label-caps text-label-caps hover:bg-surface-container transition-colors">7v7</button>
+<button class="px-4 py-2 rounded-full ghost-border font-label-caps text-label-caps hover:bg-surface-container transition-colors">9v9</button>
+<button class="px-4 py-2 rounded-full ghost-border font-label-caps text-label-caps hover:bg-surface-container transition-colors">11v11</button>
+</div>
+</div>
+<button class="w-full mt-8 bg-surface-container-highest text-on-surface py-4 rounded-lg font-button-text text-button-text hover:bg-surface-variant transition-all">Filtrlarni tozalash</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<section class="flex-1 lg:ml-[320px] p-margin-mobile md:p-margin-desktop bg-background">
+<div class="max-w-[1200px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-10 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-2">Mavjud stadionlar</h2>
+<p class="font-body-md text-text-secondary">Toshkent viloyatida 42 ta premium maydon topildi</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container p-1 rounded-lg ghost-border">
+<button class="px-4 py-2 bg-surface-variant rounded text-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label-caps text-label-caps">Setka</span>
+</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">list</span>
+<span class="font-label-caps text-label-caps">Ro'yxat</span>
+</button>
+</div>
+</div>
+<!-- Stadium Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Stadium Card 1 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxeiFPfvw_GdNTsisyNMLTaU6Lr5tXP8LvuIaC7NLyqf6RML06y2c4eRbffbCFgohmYggNRdwiMpTE-SKO3yvIQc92sqYqPTWUgh0R_xwdEt-sCgmGrpqrPiQ13EyOT2hdsgSkHjYvCE7HjK_8CH4SWYldzVsn17fhq-xt2ReadCjyOmX-iMWaCErub5rRnCzttf9L0jVA81HPPwPtdKv4Fl4tDHskZlkThkAYVkUsitGJEk9D1RMSDrldhofeBFUT7_EJGeTDd7az')"></div>
+<div class="absolute top-4 left-4 bg-primary-container text-on-primary-container px-3 py-1 rounded font-label-caps text-label-caps shadow-lg">PRO MAYDON</div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">4.9</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-white text-[20px] bg-white/10 p-1.5 rounded-full backdrop-blur-sm">local_parking</span>
+<span class="material-symbols-outlined text-white text-[20px] bg-white/10 p-1.5 rounded-full backdrop-blur-sm">shower</span>
+</div>
+<div class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-green-500/30 backdrop-blur-sm">BO'SH</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Bunyodkor Elite</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">450k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Chilonzor tumani, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Gibrid maysa</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+<!-- Stadium Card 2 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6EgYIZP646m4trY9MS0fmhk8TPRtsCON1iQZ4fHh7h-jRlR97bXs2RbCsZ7wcGYrKJI0HgAhx0MfDEyhXaBPAbgTe7BE2oxpnkNf3UHhp23B143ypJ49B7n83ZwjAQCCQh1l_L45LUKsGpxSdKEtQAxWewuI58diTkc7vqVPXvua44-bJMB_Q270rdYD4nrO3xDgkX0Rv7n_ThXF7G7H0d_IjLIB3zdeTvqLPKyPwYtSj45K3HpSNy2UbSmjj9TJBko2qgC8rOdJ7')"></div>
+<div class="absolute top-4 left-4 bg-surface-container-highest text-on-surface px-3 py-1 rounded font-label-caps text-label-caps">YOPYQ</div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">4.8</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-white text-[20px] bg-white/10 p-1.5 rounded-full backdrop-blur-sm">ac_unit</span>
+<span class="material-symbols-outlined text-white text-[20px] bg-white/10 p-1.5 rounded-full backdrop-blur-sm">wifi</span>
+</div>
+<div class="bg-red-500/20 text-red-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-red-500/30 backdrop-blur-sm">BAND</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Poytaxt Arena</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">520k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Mirobod tumani, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Sun'iy 4G</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+<!-- Stadium Card 3 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3LTxVGpQAK-QvOUTFFitC5aUDEMTgU0kxumZsnvUzCjj65-IwtLB5TvHBXWGarab5bAh4oGjyvcD0jExPsufLtS_21zHS1dLFdzsO_4oJVnmrdTrG_zfEo-2lp0XCGgJlAJspfMnyYeWp6nf_KAnDUZFsK4VvU6g_rAjOpXnM6A0tbBR1-pC_IXL3DYyyF0PUp-aUUFm-qBX39qe7g-PmSFo1KE_81PKKgqLHZJa-4b1e3kqZXInw2oQeQIecPc9umVhkDDfXKtnI')"></div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">4.7</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-white text-[20px] bg-white/10 p-1.5 rounded-full backdrop-blur-sm">stadium</span>
+</div>
+<div class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-green-500/30 backdrop-blur-sm">BO'SH</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Olympic Reserve</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">380k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Yunusobod tumani, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Tabiiy maysa</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+<!-- Stadium Card 4 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAedBaq9T8fCXQgD-qmaqTWlxGpgkBsAhBkaSUYJIxowFhLP-PEQcZcDHCsZegN5j0g3EBsE9ao-dx8dLG28XUpN8lb6HweZrZvGUx6-5kV8TN5zMUHOX1mwM4Y4meirZe-aGxUEsiPGmmuku5FZvj1Q5E68EU2z_q87ykNLM3OaCkGRCepAz84MC7LpdRW1CVcZdueRwYx0-T1KHjktGFK-n0iGD8CUvhQG8DuAjOwjP7TTLCiPHPmsP1QG-CIhsEIPjSDMsfM8BQZ')"></div>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded font-label-caps text-label-caps">TOMDA</div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">5.0</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-green-500/30 backdrop-blur-sm">BO'SH</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Skyline Turf</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">650k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Markaz, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Premium Sintetika</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+<!-- Stadium Card 5 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBD7AKG1NF_KMfH0zPVBAph7RheYy3gVtbdfjmBbswaJ6q532jDeug8IHRI4Hp7aq6_PoFLSKWu7rr6Y52kykvIWfTjSEv4OtZzAP_qPOknms9O8emL0j4YzEyx9nAn9Zt7d7-XdEoPO59ylaI9xGLhbkjW9K9xRtHMcl4qqpNjJ9IYHiUTyLflPG0APIRRr9heimrW901XjSuBIMaFSX8s8t0m9YZVigsbRtnWEvKpHgYUWi-wdV27tyMiODRXWTzz6C0aNT9gdAnz')"></div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">4.6</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="bg-red-500/20 text-red-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-red-500/30 backdrop-blur-sm">BAND</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Community Hub</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">300k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Sergeli tumani, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Standart maysa</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+<!-- Stadium Card 6 -->
+<div class="pitch-card group bg-surface-container-low rounded-xl overflow-hidden ghost-border hover:border-primary/40 transition-all duration-300 flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCuV2cqd-pyYp6uoTEy57Lzxb5rZgfOvNxRJLop6KDm-VN4xVek1B6KuLeQRGX_sY9BipsOS48mDBfPbzOFbPFMiaASogFz-wmKlBfTNAod11XJdyvsdh7Ksq_mj1cMFFbrGyyeWsubzOY9S6BoG5-GigaSi6A2Frx6FtBOTNN_s6x4fBIlGBBHJzbfb1NDLD0tSZ0uF1Crn0Njdq-lEdlBHAtMmxdtgGBwJUK0aSzJMzYHvygA7MQdYv2OihFp6WF-ZWKSY0t_TItT')"></div>
+<div class="absolute top-4 left-4 bg-primary-container text-on-primary-container px-3 py-1 rounded font-label-caps text-label-caps">ELITE HUB</div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-caps text-label-caps text-on-surface">4.9</span>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-center">
+<div class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-[10px] font-label-caps border border-green-500/30 backdrop-blur-sm">BO'SH</div>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-text-primary">Pro Academy Field</h3>
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">580k<span class="text-body-sm font-body-sm text-on-surface-variant">/soat</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Yakkasaroy tumani, Toshkent</span>
+</div>
+<div class="mt-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turi</span>
+<span class="font-body-md text-on-surface">Professional maysa</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-button-text text-button-text stadium-glow hover:scale-[1.05] active:scale-95 transition-all">Bron qilish</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg ghost-border text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-container text-on-primary-container font-button-text">1</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg ghost-border text-on-surface hover:bg-surface-container font-button-text transition-all">2</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg ghost-border text-on-surface hover:bg-surface-container font-button-text transition-all">3</button>
+<span class="w-12 h-12 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg ghost-border text-on-surface hover:bg-surface-container font-button-text transition-all">12</button>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg ghost-border text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-low border-t border-border-subtle mt-auto">
+<div class="max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-6">StadiumUz</h2>
+<p class="font-body-sm text-on-surface-variant max-w-xs">O'yinchilarni eng yaxshi futbol inshootlari bilan birlashtiramiz. Stadion bron qilishning yangi darajasini his eting.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">Platforma</h4>
+<ul class="space-y-4">
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Stadionlar</a></li>
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Ligalar</a></li>
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Tadbirlar</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">Kompaniya</h4>
+<ul class="space-y-4">
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Biz haqimizda</a></li>
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Vakansiyalar</a></li>
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Qo'llab-quvvatlash</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">Huquqiy</h4>
+<ul class="space-y-4">
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Foydalanish shartlari</a></li>
+<li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Maxfiylik siyosati</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-sm text-on-surface-variant">© 2024 StadiumUz. Professional stadionlar bron qilish tizimi.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and hover effects
+        document.querySelectorAll('.pitch-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Price range slider display logic
+        const range = document.querySelector('input[type="range"]');
+        const priceDisplay = document.querySelector('#price-range-display');
+        if(range && priceDisplay) {
+            range.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                const kVal = Math.round(val / 1000);
+                priceDisplay.textContent = `200k - ${kVal}k so'm`;
+            });
+        }
+    </script>
+</body></html>

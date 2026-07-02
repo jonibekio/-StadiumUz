@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StadiumUz Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 29, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid #2D333D;
+        }
+        .status-badge-paid { background: rgba(42, 229, 0, 0.1); color: #2ae500; border: 1px solid rgba(42, 229, 0, 0.2); }
+        .status-badge-pending { background: rgba(254, 187, 2, 0.1); color: #febb02; border: 1px solid rgba(254, 187, 2, 0.2); }
+        .status-badge-cancelled { background: rgba(255, 180, 171, 0.1); color: #ffb4ab; border: 1px solid rgba(255, 180, 171, 0.2); }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0c0e12; }
+        ::-webkit-scrollbar-thumb { background: #2D333D; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333539; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ffb4ab",
+                      "surface-container-low": "#1a1c20",
+                      "background": "#111317",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-background": "#e2e2e8",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-container": "#1e2024",
+                      "on-secondary-container": "#f2f4ff",
+                      "primary-fixed-dim": "#2ae500",
+                      "surface-variant": "#333539",
+                      "on-secondary": "#002e69",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "surface-container-lowest": "#0c0e12",
+                      "surface-elevated": "#1A1D23",
+                      "inverse-primary": "#106e00",
+                      "on-secondary-fixed-variant": "#004494",
+                      "inverse-on-surface": "#2f3035",
+                      "surface": "#111317",
+                      "tertiary-fixed-dim": "#febb02",
+                      "text-secondary": "#94A3B8",
+                      "secondary-fixed": "#d8e2ff",
+                      "border-subtle": "#2D333D",
+                      "surface-overlay": "#262A33",
+                      "text-primary": "#FFFFFF",
+                      "error-container": "#93000a",
+                      "primary": "#efffe3",
+                      "surface-dim": "#111317",
+                      "outline-variant": "#3c4b35",
+                      "on-surface-variant": "#baccb0",
+                      "surface-container-highest": "#333539",
+                      "on-error": "#690005",
+                      "secondary": "#adc6ff",
+                      "tertiary-container": "#ffd890",
+                      "outline": "#85967c",
+                      "surface-bright": "#37393e",
+                      "on-tertiary": "#412d00",
+                      "on-tertiary-container": "#7e5b00",
+                      "surface-tint": "#2ae500",
+                      "surface-container-high": "#282a2e",
+                      "primary-container": "#39ff14",
+                      "on-primary": "#053900",
+                      "inverse-surface": "#e2e2e8",
+                      "on-primary-fixed-variant": "#095300",
+                      "secondary-container": "#006be2",
+                      "on-primary-fixed": "#022100",
+                      "on-secondary-fixed": "#001a41",
+                      "on-primary-container": "#107100",
+                      "on-tertiary-fixed": "#261900",
+                      "primary-fixed": "#79ff5b",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#fff9f4",
+                      "on-surface": "#e2e2e8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "search-bar-height": "64px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "button-text": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "label-caps": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "button-text": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container/30">
+<!-- Shell Container -->
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col w-[280px] h-screen fixed left-0 top-0 py-base bg-surface-container border-r border-border-subtle z-40">
+<div class="px-6 py-8">
+<h1 class="font-display-lg text-headline-md text-primary tracking-tight">StadiumUz</h1>
+<p class="text-on-surface-variant text-body-sm mt-1">Admin Paneli</p>
+</div>
+<!-- Main Nav -->
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 py-3 px-4 text-primary font-bold border-l-4 border-primary bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Bosh sahifa</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/10 transition-all border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">stadium</span>
+<span class="font-label-caps text-label-caps">Stadionlar</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/10 transition-all border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Bronlar</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/10 transition-all border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">Foydalanuvchilar</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/10 transition-all border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps">To'lovlar</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/10 transition-all border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analitika</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-4 mb-6">
+<button class="w-full bg-primary-container text-on-primary font-button-text text-button-text py-3 rounded-lg flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(42,229,0,0.15)]">
+<span class="material-symbols-outlined">add</span>
+                    Yangi stadion qo'shish
+                </button>
+</div>
+<!-- Footer Nav -->
+<div class="px-2 border-t border-border-subtle pt-4 pb-4">
+<a class="flex items-center gap-3 py-2 px-4 text-on-surface-variant hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Sozlamalar</span>
+</a>
+<a class="flex items-center gap-3 py-2 px-4 text-on-surface-variant hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Chiqish</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-[280px] p-margin-mobile md:p-margin-desktop bg-background">
+<!-- Top Bar / Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary">Tizim sharhi</h2>
+<p class="text-on-surface-variant font-body-md">Real vaqtdagi samaradorlik va tranzaksiyalar monitoringi.</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low p-2 rounded-xl border border-border-subtle">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5DC4yCBYnxKvJbR5ASX4SW8Oblh7GZ-46fCEnr7nFEb---LcTRREefGsmOne4gScjmUFAWKc_Ah_YxT2hUvjksRlo4Q7u7RrBSUffYMxc3IIU594iKTEtkKXCwEb1tpyjDpdxmxRF8tWy1MxIm4-ALjLL_Q6llPg5UCWdtC21PN8v65q2NNNzq5-Lzsbb_H95br-aXWvog9UMNDHpdpe3dsrDmNhMI7Lljv6XMJdm-JlBmCqjd7pU-K2UXnKZnI4RKvyWGdGJ87LI')"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPuxPlA-1TlJyFFl-aIqRargh83XmK17bX4tjKc8rHKvvP_9AkMAxpj5mVEpey4qHG9v-iL3vj5WCnk6hHQQW1PPu1A3ctVBogi_TBZJFOx2NHyLO3VTcIA3DQeHNq8hwAmzhTlpcO5BnLt9M6vyfsmS21lvbqO3zZ9czsfaUAvXOP6UodfNhW9HDDrLErQHEHROMSEp2oQzseioKYEjN2S3xon7hYd2VbX5cIOIWYG-VMSgmXKY97XPry1ENQQFuxvaLjYif7rU64')"></div>
+</div>
+<div class="h-4 w-[1px] bg-border-subtle"></div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+</div>
+</header>
+<!-- KPI Row (Bento Style) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-gutter">
+<!-- KPI 1 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between group hover:border-primary-fixed-dim/40 transition-colors">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim p-2 bg-primary/5 rounded-lg">calendar_month</span>
+<span class="text-primary-fixed-dim font-label-caps text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +22%
+                        </span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant font-label-caps text-label-caps">Jami bronlar</p>
+<h3 class="text-headline-md font-headline-md text-text-primary mt-1">3,109</h3>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between group hover:border-primary-fixed-dim/40 transition-colors">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim p-2 bg-primary/5 rounded-lg">payments</span>
+<span class="text-primary-fixed-dim font-label-caps text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +8.5%
+                        </span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant font-label-caps text-label-caps">Umumiy tushum</p>
+<h3 class="text-headline-md font-headline-md text-text-primary mt-1">$482,900</h3>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between group hover:border-primary-fixed-dim/40 transition-colors">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim p-2 bg-primary/5 rounded-lg">group</span>
+<span class="text-primary-fixed-dim font-label-caps text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12%
+                        </span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant font-label-caps text-label-caps">Foydalanuvchilar</p>
+<h3 class="text-headline-md font-headline-md text-text-primary mt-1">12,482</h3>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between group hover:border-primary-fixed-dim/40 transition-colors">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim p-2 bg-primary/5 rounded-lg">stadium</span>
+<span class="text-primary-fixed-dim font-label-caps text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +4%
+                        </span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant font-label-caps text-label-caps">Mashhur stadionlar</p>
+<h3 class="text-headline-md font-headline-md text-text-primary mt-1">843</h3>
+</div>
+</div>
+</section>
+<!-- Middle Section: Revenue Chart & Recent Bookings -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+<!-- Revenue Chart -->
+<div class="xl:col-span-2 glass-panel p-6 rounded-xl flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="text-headline-md font-headline-md text-text-primary">Daromad statistikasi</h4>
+<p class="text-on-surface-variant text-body-sm">Oxirgi 30 kunlik o'sish tahlili</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-label-caps font-label-caps bg-surface-variant/20 rounded border border-border-subtle hover:bg-surface-variant/40 transition-colors">Hafta</button>
+<button class="px-3 py-1 text-label-caps font-label-caps bg-primary/10 text-primary-fixed-dim rounded border border-primary/20">Oy</button>
+</div>
+</div>
+<div class="flex-1 relative mt-auto">
+<!-- Chart Visualization Container -->
+<div class="absolute inset-0 flex items-end justify-between px-2">
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[40%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[55%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[45%]"></div>
+<div class="w-[8%] bg-primary-fixed-dim/40 rounded-t h-[70%] relative group">
+<div class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-surface-overlay border border-border-subtle p-2 rounded text-[10px] font-label-caps z-10">$14.2k</div>
+</div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[60%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[85%]"></div>
+<div class="w-[8%] bg-primary-container rounded-t h-[95%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[75%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[65%]"></div>
+<div class="w-[8%] bg-surface-variant/20 rounded-t h-[50%]"></div>
+</div>
+<!-- Axis Labels -->
+<div class="absolute bottom-[-24px] w-full flex justify-between text-[10px] font-label-caps text-on-surface-variant">
+<span>01 MAY</span>
+<span>08 MAY</span>
+<span>15 MAY</span>
+<span>22 MAY</span>
+<span>29 MAY</span>
+</div>
+</div>
+</div>
+<!-- Recent Bookings Table -->
+<div class="glass-panel p-6 rounded-xl flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h4 class="text-headline-md font-headline-md text-text-primary">Bronlar dinamikasi</h4>
+<a class="text-primary-fixed-dim text-body-sm hover:underline" href="#">Hammasi</a>
+</div>
+<div class="space-y-4 flex-1">
+<!-- Table Row 1 -->
+<div class="flex items-center justify-between py-3 border-b border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-cover bg-center border border-border-subtle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCW_ZFvFtgfX6Xl3dhOD7ZwT55i2Kwd1OfWHI5e-lEU66sXZtcilu92rodeL0zBCZDVmf4yFz8RnaTbtYGVUnL5WhxzRMszt9y1Q2mfBG7m80LIHyYklQNuPkgt_iJ91BEmieR6tv_mMVDfrRGnprVXGCTIfLAMVbVenHruaGP5TbHP0q8aspjXcEpPZkl3dLYQTTvfVanxEqLwWSgKVnuaMIbNjWCpgRCscOCUgai6apakI_D-J6yHjBF4AlcXOFltai36tly6yqpO')"></div>
+<div>
+<p class="text-body-sm font-medium text-text-primary">Elite Arena</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase">5x5 Mini</p>
+</div>
+</div>
+<div class="text-right">
+<span class="status-badge-paid px-2 py-0.5 rounded text-[10px] font-label-caps">To'langan</span>
+<p class="text-[10px] font-label-caps text-on-surface-variant mt-1">2 daqiqa avval</p>
+</div>
+</div>
+<!-- Table Row 2 -->
+<div class="flex items-center justify-between py-3 border-b border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-cover bg-center border border-border-subtle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9sf32ZJdJ-c-PNz7Ya70phPydUN467x5ZCBqXGxBt2Qxa4XhEIAaw4lTkuOC_Z-42oHFFkpyQSotwWl2uq-DdfKl-qHViSePoCG1CWv0B3fuUz-hKPXc61kN08nheV2Y2BzBxfrr9_iLIAU-wGc_RpYzz_MpOuZBovy9ttfeuntNUV0bjI5Hh-P4bBImjTe7BMLDvLoAFqGbg2NEO64eixGfsPq8_nJpHmOcHxIi7CHQRJaGcHgRxIBvcbm0GsWajp2y7LaN73o2u')"></div>
+<div>
+<p class="text-body-sm font-medium text-text-primary">Skyline Turf</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase">11x11 Katta</p>
+</div>
+</div>
+<div class="text-right">
+<span class="status-badge-pending px-2 py-0.5 rounded text-[10px] font-label-caps">Kutilmoqda</span>
+<p class="text-[10px] font-label-caps text-on-surface-variant mt-1">15 daqiqa avval</p>
+</div>
+</div>
+<!-- Table Row 3 -->
+<div class="flex items-center justify-between py-3 border-b border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-cover bg-center border border-border-subtle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDe2MrYgclUpYIAoFDV_Z0FI9iKpX6ldq_DAMUX6s-b-uT4z5xzbjwmUrqeMTLoCBqJ0CwDpB--t1JJ3mFSkIe4qGi_6U_3C2p2zc3CeTlLQDwL_L2u9HxY820SKm_6nkBTxn2GAD41fL_hqKrn0pZ3fY1j181cZ6T-yV4rD3rPXk_4k_gAU2IhTfvXZImw2eOyq5Cscp0pNe9JPCCTsduRbRyMs-HMwujp_4osQKBch3xPzjLEEHuALPy5AuE8L7TtUGzRML3aIM1d')"></div>
+<div>
+<p class="text-body-sm font-medium text-text-primary">Victory Park</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase">7x7 O'rta</p>
+</div>
+</div>
+<div class="text-right">
+<span class="status-badge-paid px-2 py-0.5 rounded text-[10px] font-label-caps">To'langan</span>
+<p class="text-[10px] font-label-caps text-on-surface-variant mt-1">1 soat avval</p>
+</div>
+</div>
+<!-- Table Row 4 -->
+<div class="flex items-center justify-between py-3 border-b border-border-subtle/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-cover bg-center border border-border-subtle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzV0M6tgTvWn61cE3rn946pkOQ9B4b1An-32bmGG3dOERCm73nEXD7QWMNf1al3M7hIV8OtFJKW1Yv6S0f4eG84kbvcbEyhWAaR0Tgl3csq6X-VMP-UOyGEaBYG4iIu-l5ZfIc3lb3BEIosM5XvmDYLSEpW8MtRAscWFdKKFnXE1RkFTM0FA-KdLiytAjGuSS-dcIWVU9P9gEUO3KzQUXbd15LRO-tdNuELcCcyrcvJK1nY0YdA1rxOZRxicPZ08WmQ4TLqLVUz1sK')"></div>
+<div>
+<p class="text-body-sm font-medium text-text-primary">Markaziy Stadion</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase">To'liq maydon</p>
+</div>
+</div>
+<div class="text-right">
+<span class="status-badge-cancelled px-2 py-0.5 rounded text-[10px] font-label-caps">Bekor qilingan</span>
+<p class="text-[10px] font-label-caps text-on-surface-variant mt-1">3 soat avval</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Detailed Stats Grid -->
+<section class="mt-gutter grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="glass-panel p-6 rounded-xl">
+<h4 class="text-headline-md font-headline-md text-text-primary mb-4">Eng yaxshi stadionlar</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-on-surface-variant w-4">01</span>
+<div class="flex-1 bg-surface-variant/10 rounded-full h-2">
+<div class="bg-primary-fixed-dim h-full rounded-full" style="width: 85%"></div>
+</div>
+<span class="text-body-sm font-medium">Elite Arena</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-on-surface-variant w-4">02</span>
+<div class="flex-1 bg-surface-variant/10 rounded-full h-2">
+<div class="bg-primary-fixed-dim h-full rounded-full" style="width: 72%"></div>
+</div>
+<span class="text-body-sm font-medium">Skyline Turf</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-on-surface-variant w-4">03</span>
+<div class="flex-1 bg-surface-variant/10 rounded-full h-2">
+<div class="bg-primary-fixed-dim h-full rounded-full" style="width: 65%"></div>
+</div>
+<span class="text-body-sm font-medium">Metro Fields</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-center items-center text-center">
+<div class="w-24 h-24 rounded-full border-4 border-primary-fixed-dim/20 flex items-center justify-center mb-4 relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-primary-fixed-dim" cx="48" cy="48" fill="transparent" r="44" stroke="currentColor" stroke-dasharray="276" stroke-dashoffset="60" stroke-width="4"></circle>
+</svg>
+<span class="font-headline-md text-primary-fixed-dim">78%</span>
+</div>
+<h4 class="text-headline-md font-headline-md text-text-primary">Bandlik darajasi</h4>
+<p class="text-on-surface-variant text-body-sm max-w-[240px] mt-2">Barcha stadionlar bo'yicha joriy foydalanish ko'rsatkichi.</p>
+</div>
+</section>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple hover effect for chart bars
+        const bars = document.querySelectorAll('.w-\\[8\\%\\]');
+        bars.forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                bar.classList.add('brightness-125');
+            });
+            bar.addEventListener('mouseleave', () => {
+                bar.classList.remove('brightness-125');
+            });
+        });
+        console.log("Admin Paneli muvaffaqiyatli yuklandi.");
+    </script>
+</body></html>
